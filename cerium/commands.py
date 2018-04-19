@@ -1,7 +1,8 @@
 import os
 import subprocess
 
-from .exceptions import DeviceConnectionException, InvalidPATHException
+from .exceptions import (CharactersException, DeviceConnectionException,
+                         InvalidPATHException)
 
 
 class AndroidDriver(object):
@@ -9,12 +10,14 @@ class AndroidDriver(object):
     Allows you to drive the android device.
     You will need to download the ADB executable from https://github.com/fjwCode/cerium.
     '''
+
     def __init__(self, executable_path='adb', device_sn=None, debug=False):
         if executable_path in ['adb', 'adb.exe']:
             self.__path = executable_path
             PATH = os.environ['PATH']
             if not ('adb' in PATH or 'android' in PATH):
-                raise InvalidPATHException('PATH does not exist. You will need to download the ADB executable from https://github.com/fjwCode/cerium. Then add to PATH.')
+                raise InvalidPATHException(
+                    'PATH does not exist. You will need to download the ADB executable from https://github.com/fjwCode/cerium. Then add to PATH.')
         elif executable_path.endswith('adb.exe'):
             self.__path = executable_path
             if not os.path.isfile(executable_path):
@@ -40,7 +43,7 @@ class AndroidDriver(object):
                 'No devices are connected. Please connect the device with USB and turn on the USB debugging option.')
         elif not self.__target_sn and devices_num > 1:
             raise DeviceConnectionException(
-                'Multiple devices detected, please specify device serial number.')
+                'Multiple devices detected: {}, please specify device serial number.'.format(' | '.join(self.__devices)))
         else:
             self.__target_sn = self.__devices[0]
 
@@ -122,7 +125,7 @@ class AndroidDriver(object):
         copy local files/directories to device
         '''
         if not os.path.exists(local):
-            raise PathException(
+            raise InvalidPATHException(
                 'Local path {!r} does not exist.'.format(local))
         output, error = self.__run_command('-s', self.__target_sn,
                                            'push', local, remote)
@@ -134,7 +137,7 @@ class AndroidDriver(object):
         output, error = self.__run_command('-s', self.__target_sn,
                                            'pull', remote, local)
         if 'error' in output:
-            raise PathException(
+            raise InvalidPATHException(
                 'Remote path {!r} does not exist.'.format(remote))
 
     def screencap(self, filename='/sdcard/screencap.png'):
@@ -158,27 +161,31 @@ class AndroidDriver(object):
         self.__run_command('-s', self.__target_sn, 'shell',
                            'input', 'tap', str(x), str(y))
 
-    def input_swipe(self, x1, y1, x2, y2, duration=''):
+    def input_swipe(self, x1, y1, x2, y2, duration=100):
         '''
         simulate finger slide
         '''
         self.__run_command('-s', self.__target_sn, 'shell',
                            'input', 'swipe', str(x1), str(y1), str(x2), str(y2), str(duration))
 
-    def input_text(self, text):
+    def input_text(self, text: str = 'cerium'):
         '''
         input text
         '''
+        for char in text:
+            if '\u4e00' <= char <= '\u9fff':
+                raise CharactersException(
+                    'Text cannot contain non-English characters, such as {!r}.'.format(char))
         text = text.replace(' ', '\ ')
         self.__run_command('-s', self.__target_sn, 'shell',
                            'input', 'text', text)
 
-    def input_keyevent(self, keyevent):
+    def input_keyevent(self, keyevent: int or str):
         '''
         input keyevent
         '''
         self.__run_command('-s', self.__target_sn, 'shell',
-                           'input', 'keyevent', keyevent)
+                           'input', 'keyevent', str(keyevent))
 
     def reboot(self, mode='default'):
         '''

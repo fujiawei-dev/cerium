@@ -19,22 +19,23 @@
 from setuptools import setup
 '''
 python setup.py sdist
+python setup.py bdist_wheel
 twine upload dist/*
-pip install dist\cerium-1.0.1.tar.gz
+pip install dist\cerium-1.0.2.tar.gz
 '''
 
 setup(
-    name = 'cerium',
-    packages = ['cerium'],
-    version = '1.0.2',
-    license = 'Apache 2.0',
-    author = 'White Turing',
-    author_email = 'fujiawei@stu.hznu.edu.cn',
-    description = 'A Android automation framework.',
-    long_description = 'This project is mainly targeted to users that need to communicate with Android devices in an automated fashion, such as in automated testing.',
-    url = 'https://github.com/fjwCode/cerium',
-    keywords = ['android', 'adb', 'automation'],
-    classifiers = [
+    name='cerium',
+    packages=['cerium'],
+    version='1.0.2',
+    license='Apache 2.0',
+    author='White Turing',
+    author_email='fujiawei@stu.hznu.edu.cn',
+    description='A Android automation framework.',
+    long_description='This project is mainly targeted to users that need to communicate with Android devices in an automated fashion, such as in automated testing.',
+    url='https://github.com/fjwCode/cerium',
+    keywords=['android', 'adb', 'automation'],
+    classifiers=[
         'Intended Audience :: Developers',
         'License :: OSI Approved :: Apache Software License',
         'Operating System :: Microsoft :: Windows',
@@ -42,5 +43,6 @@ setup(
         'Topic :: Software Development :: Testing',
         'Topic :: Software Development :: Libraries',
     ],
-    data_files = [('adb', ['adb/adb.exe', 'adb/AdbWinApi.dll', 'adb/AdbWinUsbApi.dll'])],
+    data_files=[('Lib/site-packages/adb', ['adb/adb.exe',
+                                           'adb/AdbWinApi.dll', 'adb/AdbWinUsbApi.dll'])],
 )

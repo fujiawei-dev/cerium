@@ -27,7 +27,7 @@ pip install dist\cerium-1.0.2.tar.gz
 setup(
     name='cerium',
     packages=['cerium'],
-    version='1.0.2',
+    version='1.0.3',
     license='Apache 2.0',
     author='White Turing',
     author_email='fujiawei@stu.hznu.edu.cn',

@@ -27,3 +27,10 @@ class DeviceConnectionException(AndroidDriverException):
     Thrown when no devices are connected.
     """
     pass
+
+
+class CharactersException(AndroidDriverException):
+    """
+    Thrown when no devices are connected.
+    """
+    pass

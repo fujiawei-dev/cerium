@@ -11,7 +11,13 @@ class AndroidDriver(object):
     You will need to download the ADB executable from https://github.com/fjwCode/cerium.
     '''
 
-    def __init__(self, executable_path='adb', device_sn=None, debug=False):
+    def __init__(self, executable_path='default', device_sn=None, debug=False):
+        '''
+        Cerium requires a driver to with the chosen android device.
+        Make sure it's in your PATH, e. g., place it in C:/Anaconda3.
+        Or specify the path to the executable.
+        Of course, you also can choose the default option.
+        '''
         if executable_path in ['adb', 'adb.exe']:
             self.__path = executable_path
             PATH = os.environ['PATH']
@@ -23,13 +29,16 @@ class AndroidDriver(object):
             if not os.path.isfile(executable_path):
                 raise InvalidPATHException(
                     '{!r} does not exist. You will need to download the ADB executable from https://github.com/fjwCode/cerium.'.format(self.__path))
-        else:
+        elif executable_path == 'default':
             self.__path = os.path.join(
                 os.path.split(os.path.dirname(__file__))[0],
                 'adb', 'adb.exe')
             if not os.path.isfile(self.__path):
                 raise InvalidPATHException(
                     '{!r} does not exist. You will need to download the ADB executable from https://github.com/fjwCode/cerium.'.format(self.__path))
+        else:
+            raise InvalidPATHException(
+                'You will need to download the ADB executable from https://github.com/fjwCode/cerium.')
         self.__debug = debug
         self.__start_server()
         self.__target_sn = device_sn

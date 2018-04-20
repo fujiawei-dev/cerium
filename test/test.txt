@@ -1,0 +1,4 @@
+python setup.py sdist
+python setup.py bdist_wheel
+twine upload dist/*
+pip install dist\cerium-1.0.2.tar.gz

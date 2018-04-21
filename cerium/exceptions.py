@@ -34,3 +34,21 @@ class CharactersException(AndroidDriverException):
     Thrown when no devices are connected.
     """
     pass
+
+class ParametersException(AndroidDriverException):
+    """
+    Thrown when a parameter error occurs.
+    """
+    pass
+
+class PackageException(AndroidDriverException):
+    """
+    Thrown when the package does not exist.
+    """
+    pass
+
+class WLANConnectException(AndroidDriverException):
+    """
+    Thrown when the device is not connected to WLAN.
+    """
+    pass

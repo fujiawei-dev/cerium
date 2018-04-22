@@ -1,9 +1,10 @@
 import os
 import subprocess
 
-from .exceptions import (CharactersException, DeviceConnectionException,
-                         InvalidPATHException, PackageException,
-                         ParametersException, WLANConnectException)
+from .exceptions import (ApplicationsException, CharactersException,
+                         DeviceConnectionException, InvalidPATHException,
+                         PackageException, ParametersException,
+                         RootPermissionsException, WLANConnectException)
 
 
 class AndroidDriver(object):
@@ -135,12 +136,108 @@ class AndroidDriver(object):
         output, error = self.__run_command('version')
         return output.splitlines()[0].split()[-1]
 
+    def model(self):
+        '''
+        show model
+        '''
+        output, error = self.__run_command('-s', self.__target_sn, 'shell',
+                                           'getprop', 'ro.product.model')
+        return output.strip()
+
+    def battery(self):
+        '''
+        show model
+        '''
+        output, error = self.__run_command('-s', self.__target_sn, 'shell',
+                                           'dumpsys', 'battery')
+        return output
+
+    def physical_size(self):
+        '''
+        show physical size
+        '''
+        output, error = self.__run_command('-s', self.__target_sn, 'shell',
+                                           'wm', 'size')
+        return output.split()[2]
+
+    def density(self):
+        '''
+        show density
+        '''
+        output, error = self.__run_command('-s', self.__target_sn, 'shell',
+                                           'wm', 'density')
+        return output.split()[2]
+
+    def displays(self):
+        '''
+        show displays parameters
+        '''
+        output, error = self.__run_command(
+            '-s', self.__target_sn, 'shell', 'dumpsys', 'window', 'displays')
+        return output
+
+    def android_id(self):
+        '''
+        show android id
+        '''
+        output, error = self.__run_command(
+            '-s', self.__target_sn, 'shell', 'settings', 'get', 'secure', 'android_id')
+        return output.strip()
+
+    def android_version(self):
+        '''
+        show android version
+        '''
+        output, error = self.__run_command(
+            '-s', self.__target_sn, 'shell', 'getprop', 'ro.build.version.release')
+        return output.strip()
+
+    def device_mac(self):
+        '''
+        show device mac
+        '''
+        output, error = self.__run_command(
+            '-s', self.__target_sn, 'shell', 'cat', '/sys/class/net/wlan0/address')
+        return output.strip()
+
+    def device_cpu(self):
+        '''
+        show device CPU info
+        '''
+        output, error = self.__run_command(
+            '-s', self.__target_sn, 'shell', 'cat', '/proc/cpuinfo')
+        return output
+
+    def device_memory(self):
+        '''
+        show device memory
+        '''
+        output, error = self.__run_command(
+            '-s', self.__target_sn, 'shell', 'cat', '/proc/meminfo')
+        return output
+
+    def root(self):
+        '''
+        restart adbd with root permissions
+        '''
+        output, error = self.__run_command('root')
+        if not output:
+            raise RootPermissionsException(
+                '{!r} does not have root permission.'.format(self.__target_sn))
+
+    def unroot(self):
+        '''
+        restart adbd without root permissions
+        '''
+        self.__run_command('unroot')
+
     def connect(self, port=5555):
         '''
         connect to a device via TCP/IP
         '''
         host = self.__wlan_address()
         self.__target_sn = '{}:{}'.format(host, port)
+        # restart adb server listening on TCP on PORT
         self.__run_command('tcpip', str(port))
         self.__run_command('connect', self.__target_sn)
         print('Now you can unplug the USB cable, and control your device via WLAN.')
@@ -233,6 +330,7 @@ class AndroidDriver(object):
             raise ParametersException(
                 'There is no option named: {!r}.'.format(option))
 
+    # Application Management
     def install(self, package: str, option='-r'):
         '''
         push package to the device and install it
@@ -333,6 +431,98 @@ class AndroidDriver(object):
         self.__run_command('-s', self.__target_sn,
                            'shell', 'pm', 'clear', package)
 
+    def shell_dumpsys_activity_focused_activity(self):
+        '''
+        view reception activity
+        '''
+        output, error = self.__run_command('-s', self.__target_sn,
+                                           'shell', 'dumpsys', 'activity', 'activities', '|', 'grep', 'mFocusedActivity')
+        return output.strip()
+
+    def shell_dumpsys_activity_services(self, package=''):
+        '''
+        view running services
+        '''
+        output, error = self.__run_command('-s', self.__target_sn,
+                                           'shell', 'dumpsys', 'activity', 'services', package)
+        return output
+
+    def shell_dumpsys_package(self, package=''):
+        '''
+        query package detail information
+        '''
+        output, error = self.__run_command('-s', self.__target_sn,
+                                           'shell', 'dumpsys', 'package', package)
+        return output
+
+    def shell_dumpsys_windows_current(self):
+        '''
+        get current application behavior
+        '''
+        output, error = self.__run_command('-s', self.__target_sn,
+                                           'shell', 'dumpsys', 'window', 'windows', '|', 'findstr', '"Current"')
+        return output
+
+    # Interact with Applications
+    def shell_am_start(self, *args):
+        '''
+        -a <ACTION>
+        -c <CATEGORY>
+        -n <COMPONENT>
+        for example:
+            from cerium import AndroidDriver
+            driver = AndroidDriver()
+            driver.shell_am_start('-n', 'com.tencent.android.qqdownloader/com.tencent.assistantv2.activity.MainActivity')
+        '''
+        output, error = self.__run_command('-s', self.__target_sn, 'shell',
+                                           'am', 'start', *args)
+        if error and error.startswith('Error'):
+            raise ApplicationsException(error.split(':', 1)[-1].strip())
+
+    def shell_am_startservice(self, *args):
+        '''
+        start a service
+        '''
+        output, error = self.__run_command('-s', self.__target_sn, 'shell',
+                                           'am', 'startservice', *args)
+        if error and error.startswith('Error'):
+            raise ApplicationsException(error.split(':', 1)[-1].strip())
+
+    def shell_am_stopservice(self, *args):
+        '''
+        start a service
+        '''
+        output, error = self.__run_command('-s', self.__target_sn, 'shell',
+                                           'am', 'stopservice', *args)
+        if error and error.startswith('Error'):
+            raise ApplicationsException(error.split(':', 1)[-1].strip())
+
+    def shell_am_broadcast(self, *args):
+        '''
+        send a broadcast
+        '''
+        output, error = self.__run_command('-s', self.__target_sn, 'shell',
+                                           'am', 'broadcast', *args)
+        if error:
+            raise ApplicationsException(error.split(':', 1)[-1].strip())
+
+    def shell_am_force_stop(self, package):
+        '''
+        force stop an application
+        '''
+        self.__run_command('-s', self.__target_sn, 'shell',
+                           'am', 'force-stop', package)
+
+    def shell_am_send_trim_memory(self, pid: int, level='RUNNING_LOW'):
+        '''
+        trim memory
+        -level: HIDDEN、RUNNING_MODERATE、BACKGROUND、 RUNNING_LOW、MODERATE、RUNNING_CRITICAL、COMPLETE
+        '''
+        output, error = self.__run_command('-s', self.__target_sn, 'shell',
+                                           'am', 'send-trim-memory', str(pid), level)
+        if error and error.startswith('Error'):
+            raise ApplicationsException(error.split(':', 1)[-1].strip())
+
     def screencap(self, filename='/sdcard/screencap.png'):
         '''
         taking a screenshot of a device display
@@ -346,6 +536,13 @@ class AndroidDriver(object):
         '''
         self.screencap(remote)
         self.pull(remote, local)
+
+    def screencap_exec(self, save_as='screencap.png'):
+        '''
+        taking a screenshot of a device display, then copy it to your computer
+        '''
+        self.__run_command('-s', self.__target_sn, 'exec-out',
+                           'screencap', '-p', '>', save_as)
 
     def screenrecord(self, bit_rate: int = 5000000, time_limit: int = 180, filename='/sdcard/demo.mp4'):
         '''
@@ -398,14 +595,16 @@ class AndroidDriver(object):
         self.__run_command('-s', self.__target_sn, 'shell',
                            'input', 'keyevent', str(keyevent))
 
-    def reboot(self, mode='default'):
+    def monkey(self, package, v=500):
+        pass
+
+    def reboot(self, mode=''):
         '''
         reboot the device;
         defaults to booting system image but supports bootloader and recovery too.
-        sideload reboots into recovery and automatically starts sideload mode,
-        sideload-auto-reboot is the same but reboots after sideloading.
         '''
-        self.__run_command('-s', self.__target_sn, 'reboot')
+        ['recovery', 'bootloader']
+        self.__run_command('-s', self.__target_sn, 'reboot', mode)
 
     def __enter__(self, *arg):
         return self

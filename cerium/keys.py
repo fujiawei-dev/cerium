@@ -64,6 +64,19 @@ class Keys(object):
     # Control Keys
     POWER = 26
 
+    BROWSER = 64
+    SETTING = 176
+    SWITCH = 187
+    CONTACTS = 207
+    CALENDAR = 208
+    MUSIC = 209
+    CALCULATOR = 210
+    BRIGHTNESS_DOWN = 220
+    BRIGHTNESS_UP = 221
+    LOCK = 223
+    WAKE = 224
+    VOICE_ASSISTANT = 231
+
     MUTE = 91
     NOTIFICATION = 83
     VOLUME_MUTE = 164

@@ -52,3 +52,15 @@ class WLANConnectException(AndroidDriverException):
     Thrown when the device is not connected to WLAN.
     """
     pass
+
+class RootPermissionsException(AndroidDriverException):
+    """
+    Thrown when no root permissions.
+    """
+    pass
+
+class ApplicationsException(AndroidDriverException):
+    """
+    Thrown when using the wrong command to run the application.
+    """
+    pass

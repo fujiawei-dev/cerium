@@ -10,7 +10,8 @@ Welcome to cerium's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-
+.. automodule:: cerium
+   :members:
 
 Indices and tables
 ==================

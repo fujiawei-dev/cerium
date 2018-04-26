@@ -11,6 +11,9 @@ Cerium's source code is made available under the [Apache 2.0 license](https://gi
 ## Supported Python Versions
 * Python 3.6+
 
+## Supported Platforms
+* Windows
+
 ## Installation
 If you have [pip](https://pip.pypa.io/) on your system, you can simply install or upgrade cerium:
 
@@ -30,9 +33,7 @@ Or by [github.com](https://github.com/fjwCode/cerium):
 
 
 ## [Android Debug Bridge](http://web.mit.edu/ruggles/MacData/afs/sipb/project/android/OldFiles/docs/tools/help/adb.html) 
-Cerium requires a driver to with the chosen android device. Make sure it's in your PATH, e. g., place it in C:/Anaconda3. Or specify the path to the executable. Of course, you also can choose the default option. Cerium contains *Android Debug Bridge*.
-
-Failure to observe this step will give you an error cerium.exceptions.AndroidDriverException.
+Cerium requires Android Debug Bridge Tool to with the chosen android device. And Cerium contains *Android Debug Bridge*  by default. You don't need to set the environment variable by yourself.
 
 
 ## Quickstart
@@ -75,19 +76,7 @@ from cerium import AndroidDriver
 
 driver = AndroidDriver()
 
-driver.input_tap(100, 100)
-driver.input_swipe(100, 200, 100, 100, duration=100)
-driver.input_text("I'm White Turing.")
-```
-
-* Input Android keyevent.
-* Kill the server if running.
-
-```python
-from cerium import AndroidDriver, Keys
-
-driver = AndroidDriver()
-
-driver.input_keyevent(Keys.HOME)
-driver.kill_server()
+driver.click(100, 100)
+driver.swipe(100, 200, 100, 100, duration=100)
+driver.send_keys("I'm White Turing.")
 ```

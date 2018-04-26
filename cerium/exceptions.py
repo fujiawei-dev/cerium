@@ -1,66 +1,48 @@
-"""
-Exceptions that may happen in all the androiddriver code.
+# Licensed to the Software Freedom Conservancy (SFC) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The SFC licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
 
-"""
+"""Exceptions that may happen in all the androiddriver code."""
 
 
 class AndroidDriverException(Exception):
-    """
-    Base androiddriver exception.
-    """
-    def __init__(self, msg=None):
-        self.msg = msg
-
-    def __str__(self):
-        return self.msg
-
-
-class InvalidPATHException(AndroidDriverException):
-    """
-    Thrown when the adb PATH doesn't exist.
-    """
+    """Base androiddriver exception."""
     pass
 
 
-class DeviceConnectionException(AndroidDriverException):
-    """
-    Thrown when no devices are connected.
-    """
+class ApplicationsException(AndroidDriverException):
+    """Thrown when using the wrong command to run the application."""
     pass
 
 
 class CharactersException(AndroidDriverException):
-    """
-    Thrown when no devices are connected.
-    """
+    """Thrown when a character error occurs."""
     pass
 
-class ParametersException(AndroidDriverException):
-    """
-    Thrown when a parameter error occurs.
-    """
+
+class DeviceConnectionException(AndroidDriverException):
+    """Thrown when no devices are connected."""
     pass
 
-class PackageException(AndroidDriverException):
-    """
-    Thrown when the package does not exist.
-    """
+
+class NoSuchElementException(AndroidDriverException):
+    """Thrown when the element could not be found."""
     pass
 
-class WLANConnectException(AndroidDriverException):
-    """
-    Thrown when the device is not connected to WLAN.
-    """
-    pass
 
-class RootPermissionsException(AndroidDriverException):
-    """
-    Thrown when no root permissions.
-    """
-    pass
-
-class ApplicationsException(AndroidDriverException):
-    """
-    Thrown when using the wrong command to run the application.
-    """
+class NoSuchPackageException(AndroidDriverException):
+    """Thrown when the package does not exist."""
     pass

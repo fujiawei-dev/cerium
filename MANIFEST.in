@@ -1,4 +1,7 @@
 prune test
+prune demo
 include LICENSE
 include NOTICE
-graft cerium
+include cerium/*.py
+include cerium/executable/*.exe
+include cerium/executable/*.dll

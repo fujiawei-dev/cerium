@@ -1,12 +1,25 @@
-"""
-The Keys implementation.
-"""
+# Licensed to the Software Freedom Conservancy (SFC) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The SFC licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+
+"""The Keys implementation."""
 
 
 class Keys(object):
-    """
-    Set of special keys codes.
-    """
+    """Set of special keys codes."""
 
     # Number Pad Keys
     NUMPAD0 = 7
@@ -63,19 +76,11 @@ class Keys(object):
 
     # Control Keys
     POWER = 26
-
-    BROWSER = 64
-    SETTING = 176
-    SWITCH = 187
-    CONTACTS = 207
-    CALENDAR = 208
-    MUSIC = 209
-    CALCULATOR = 210
-    BRIGHTNESS_DOWN = 220
-    BRIGHTNESS_UP = 221
     LOCK = 223
     WAKE = 224
-    VOICE_ASSISTANT = 231
+
+    BRIGHTNESS_DOWN = 220
+    BRIGHTNESS_UP = 221
 
     MUTE = 91
     NOTIFICATION = 83
@@ -83,6 +88,16 @@ class Keys(object):
     VOLUME_UP = 24
     VOLUME_DOWN = 25
 
+    SWITCH = 187                # switching applications
+
+    # Open an Application
+    BROWSER = 64
+    SETTING = 176
+    CONTACTS = 207
+    CALENDAR = 208
+    MUSIC = 209
+    CALCULATOR = 210
+    VOICE_ASSISTANT = 231
     SEARCH = 84
 
     DPAD_UP = 19
@@ -97,6 +112,7 @@ class Keys(object):
     PAGE_UP = 92
     PAGE_DOWN = 93
 
+    CLEAR = 28
     DEL = 67
     FORWARD_DEL = 112
     INSERT = 124
@@ -126,10 +142,9 @@ class Keys(object):
     RIGHT_BRACKET = 72  # ]
     SEMICOLON = 74    # ;
     GRAVE = 68    # `
-    SPACE = 62    # whitespace
+    SPACE = 62
 
     NUM = 78
-    CLEAR = 28
 
     MEDIA_PLAY_PAUSE = 85
     MEDIA_STOP = 86

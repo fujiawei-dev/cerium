@@ -53,8 +53,7 @@ instructions for getting the most out of Cerium.
    user/intro
    user/install
    user/quickstart
-   user/advanced
-   user/authentication
+   
 
 The API Documentation / Guide
 -----------------------------

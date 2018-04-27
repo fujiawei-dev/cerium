@@ -53,7 +53,7 @@ instructions for getting the most out of Cerium.
    user/intro
    user/install
    user/quickstart
-   
+
 
 The API Documentation / Guide
 -----------------------------
@@ -77,6 +77,7 @@ you.
    :maxdepth: 2
 
     authors
+
 
 There are no more guides. You are now guideless.
 Good luck.

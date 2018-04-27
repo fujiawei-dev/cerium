@@ -3,7 +3,6 @@
 Authors
 =======
 
-
 White Turing
 --------------
 

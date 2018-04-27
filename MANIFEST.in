@@ -1,5 +1,6 @@
 prune test
 prune demo
+prune docs
 include LICENSE
 include NOTICE
 include cerium/*.py

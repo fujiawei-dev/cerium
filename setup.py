@@ -26,6 +26,10 @@ twine upload dist/*
 pip install dist\cerium-1.1.0.tar.gz
 '''
 
+requires = [
+    'lxml>=4.2.1',
+]
+
 setup(
     name='cerium',
     packages=['cerium'],
@@ -54,5 +58,6 @@ setup(
     },
     include_package_data=True,
     python_requires='>=3.6',
+    install_requires=requires,
     platforms=["Windows"],
 )

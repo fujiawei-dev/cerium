@@ -33,7 +33,8 @@ Release v\ |version|. (:ref:`Installation <install>`)
     >>> driver.auto_connect()   # connect to your device via TCP/IP automatically
     Now you can unplug the USB cable, and control your device via WLAN.
     >>> driver.view_packgets_list(keyword='tencent')
-    ['com.tencent.androidqqmail', 'com.tencent.mm', 'com.tencent.android.qqdownloader', 'com.tencent.token', 'com.tencent.mtt', 'com.tencent.tim', 'com.tencent.mobileqq']
+    ['com.tencent.mm', 'com.tencent.android.qqdownloader', 'com.tencent.tim']
+    >>> driver.make_a_call(18268237856)   # call me
 
 
 **Cerium** allows you to send *organic, grass-fed* commands, without the the need for manual labor.

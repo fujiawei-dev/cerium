@@ -82,4 +82,81 @@ There are more buttons waiting for you to discover.
 Even you can use *driver.send_keyevents()* to send a Android keyevent.
 
 
-Open WeChet And Interact with Applications
+Device Connection Management
+-----------------------------------
+
+I really don't like play Cerium with a USB cable, so let's embracing the wireless world::
+
+    >>> driver.auto_connect()   # connect to your device via TCP/IP automatically
+    Now you can unplug the USB cable, and control your device via WLAN.
+
+
+We can get rid of the limit of the USB cable within a certain range it!
+
+
+Application Management
+---------------------------
+
+Show all packages fliter by keyword::
+
+    >>> driver.view_packgets_list(keyword='tencent')
+    ['com.tencent.mm', 'com.tencent.android.qqdownloader', 'com.tencent.tim']
+
+Let's install an application::
+
+    >>> driver.install('tv.apk')
+    >>> driver.view_packgets_list(keyword='tv')
+    ['com.hunantv.imgo.activity']
+
+And then, uninstall it::
+
+    >>> driver.uninstall('com.hunantv.imgo.activity')
+    >>> driver.view_packgets_list(keyword='tv')
+    []
+
+View focused activity::
+
+    >>> driver.view_focused_activity()
+    'com.tencent.mm/.ui.LauncherUI'
+
+
+Interact with Applications
+---------------------------
+
+Launch WeChat::
+
+    >>> driver.launch_app('com.tencent.mm/com.tencent.mm.ui.LauncherUI')
+
+Let's enter the chat interface and start chatting::
+
+    >>> element = driver.find_element_by_class('android.widget.EditText')
+    >>> element.clear()
+    >>> element.send_keys("I'm White Turing.")
+
+Close WeChat::
+
+    >>> driver.close_app('com.tencent.mm')
+
+
+File Management
+---------------------------
+
+Copy files from your computer to your phone::
+
+    >>> driver.push('tv.apk', '/sdcard/tv.apk)
+
+
+Copy files from your phone to your computer::
+
+    >>> driver.pull('/sdcard/LICENSE', 'LICENSE')
+
+
+Taking a screenshot of a device display, then copy it to your computer::
+
+    >>> driver.pull_screencap(local='screencap.png')
+
+
+
+-----------------------
+
+Ready for more? Check out the :ref:`advanced <api>` section.

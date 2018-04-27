@@ -42,9 +42,9 @@ class BaseAndroidDriver(Service):
     _nodes = None
 
     def __init__(self, executable_path='default', device_sn=None, wireless=False, host='192.168.0.3', port=5555, service_port=5037, env=None, service_args=None, dev=False):
-        '''Creates a new instance of the chrome driver.
+        '''Creates a new instance of the android driver.
 
-        Starts the service and then creates new instance of chrome driver.
+        Starts the service and then creates new instance of android driver.
 
         Args:
             executable_path: Path to the executable. The default uses its own executable.
@@ -445,8 +445,8 @@ class BaseAndroidDriver(Service):
         if error:
             raise ApplicationsException(error.split(':', 1)[-1].strip())
 
-    def force_stop_app(self, package):
-        '''Force stop an application.'''
+    def close_app(self, package):
+        '''Close an application.'''
         self._execute('-s', self.device_sn, 'shell',
                       'am', 'force-stop', package)
 
@@ -778,6 +778,10 @@ class AndroidDriver(BaseAndroidDriver):
     def open_url(self, url='https://www.baidu.com'):
         '''Open a web page with the default browser.'''
         self.app_start_action(Actions.VIEW, '-d', url)
+
+    def launch_app(self, package):
+        '''Launch an application.'''
+        self.app_start_action(package)
 
     def make_a_call(self, number=18268237856):
         '''Make a call.'''

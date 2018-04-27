@@ -41,7 +41,7 @@ Release v\ |version|. (:ref:`Installation <install>`)
 
 
 The User Guide
---------------
+-----------------
 
 This part of the documentation, which is mostly prose, begins with some
 background information about Cerium, then focuses on step-by-step
@@ -56,7 +56,7 @@ instructions for getting the most out of Cerium.
 
 
 The API Documentation / Guide
------------------------------
+----------------------------------
 
 If you are looking for information on a specific function, class, or method,
 this part of the documentation is for you.
@@ -68,13 +68,13 @@ this part of the documentation is for you.
 
 
 The Contributor Guide
----------------------
+------------------------
 
 If you want to contribute to the project, this part of the documentation is for
 you.
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 3
 
     authors
 

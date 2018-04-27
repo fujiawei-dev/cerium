@@ -16,7 +16,9 @@
 # under the License.
 
 
+from cerium import __version__
 from setuptools import setup
+
 '''
 python setup.py sdist
 python setup.py bdist_wheel
@@ -27,7 +29,7 @@ pip install dist\cerium-1.1.0.tar.gz
 setup(
     name='cerium',
     packages=['cerium'],
-    version='1.1.0',
+    version=__version__,
     license='Apache 2.0',
     author='White Turing',
     author_email='fujiawei@stu.hznu.edu.cn',
@@ -51,6 +53,6 @@ setup(
         ]
     },
     include_package_data=True,
-    python_requires= '>=3.6',
+    python_requires='>=3.6',
     platforms=["Windows"],
 )

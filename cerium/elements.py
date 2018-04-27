@@ -82,6 +82,11 @@ class Elements(object):
         for i in self.text:
             self._parent.send_keyevents(Keys.DEL)
 
+    def send_keys(self, text: str = 'cerium'):
+        '''Simulates typing keys.'''
+        self.click()
+        self._parent.send_keys(text)
+
     def is_selected(self) -> bool:
         """Returns whether the element is selected.
 

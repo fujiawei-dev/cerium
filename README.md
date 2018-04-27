@@ -1,9 +1,12 @@
-# Cerium [![License](https://img.shields.io/badge/license-Apache_2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0) [![PyPI version](https://badge.fury.io/py/cerium.svg)](https://badge.fury.io/py/cerium) 
+# Cerium [![License](https://img.shields.io/badge/license-Apache_2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0) [![PyPI version](https://badge.fury.io/py/cerium.svg)](https://badge.fury.io/py/cerium) [![Wheel](https://img.shields.io/pypi/wheel/cerium.svg)](https://pypi.org/project/cerium/) [![Python version](https://img.shields.io/pypi/pyversions/cerium.svg)](https://pypi.org/project/cerium/)
 
 > Cerium is an umbrella project encapsulating a variety of tools and
 libraries enabling android automation.
 
 Cerium's source code is made available under the [Apache 2.0 license](https://github.com/fjwCode/cerium/LICENSE).
+
+Welcome to Read the Docs for [Cerium](http://cerium.readthedocs.io/).
+
 
 ## Introduction
 [Android Debug Bridge (adb)](http://web.mit.edu/ruggles/MacData/afs/sipb/project/android/OldFiles/docs/tools/help/adb.html) is a versatile command line tool that lets you communicate with an emulator instance or connected Android-powered device. This project is based on it.

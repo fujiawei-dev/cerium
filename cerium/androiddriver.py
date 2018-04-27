@@ -110,7 +110,7 @@ class BaseAndroidDriver(Service):
                 "Command: {!r}".format(command),
                 "Output: {!r}".format(output.encode('utf-8')),
                 "Error: {!r}".format(error.encode('utf-8')),
-                # sep='\n', end='\n{}\n'.format('=' * 80)
+                sep='\n', end='\n{}\n'.format('=' * 80)
             )
         return process.communicate()
 

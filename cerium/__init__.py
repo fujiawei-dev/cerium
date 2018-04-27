@@ -21,3 +21,4 @@ from .intent import Actions, Category
 from .keys import Keys
 
 __author__ = "White Turing"
+__version__ = "1.1.1"

@@ -522,7 +522,7 @@ class BaseAndroidDriver(Service):
             if '\u4e00' <= char <= '\u9fff':
                 raise CharactersException(
                     'Text cannot contain non-English characters, such as {!r}.'.format(char))
-        text = text.replace(' ', '\ ')
+        text = text.replace(' ', '\ ').replace("'", "\\'").replace('"', '\\"')
         self._execute('-s', self.device_sn, 'shell',
                       'input', 'text', text)
 
@@ -781,7 +781,7 @@ class AndroidDriver(BaseAndroidDriver):
 
     def launch_app(self, package):
         '''Launch an application.'''
-        self.app_start_action(package)
+        self.app_start_activity(package)
 
     def make_a_call(self, number=18268237856):
         '''Make a call.'''

@@ -11,6 +11,9 @@ Release v\ |version|. (:ref:`Installation <install>`)
 .. image:: https://img.shields.io/pypi/l/cerium.svg
     :target: https://pypi.org/project/cerium/
 
+.. image:: https://badge.fury.io/py/cerium.svg
+    :target: https://badge.fury.io/py/cerium
+
 .. image:: https://img.shields.io/pypi/wheel/cerium.svg
     :target: https://pypi.org/project/cerium/
 

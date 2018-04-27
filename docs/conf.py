@@ -34,8 +34,6 @@ import cerium
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx.ext.intersphinx',
-    'sphinx.ext.todo',
     'sphinx.ext.viewcode',
 ]
 
@@ -95,7 +93,6 @@ add_module_names = True
 pygments_style = 'sphinx'
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
-todo_include_todos = True
 
 
 # -- Options for HTML output ----------------------------------------------
@@ -109,14 +106,8 @@ html_theme = 'default'
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-html_theme_options = {
-    'show_powered_by': False,
-    'github_user': 'cerium',
-    'github_repo': 'cerium',
-    'github_banner': True,
-    'show_related': False,
-    'note_bg': '#FFF59C'
-}
+# html_theme_options = {
+# }
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -174,7 +165,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'cerium.tex', 'cerium Documentation',
+    (master_doc, 'Cerium.tex', 'Cerium Documentation',
      'White Turing', 'manual'),
 ]
 

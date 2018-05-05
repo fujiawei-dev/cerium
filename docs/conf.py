@@ -114,12 +114,14 @@ html_theme = 'alabaster'
 # documentation.
 #
 html_theme_options = {
-    'description': 'A Android automation framework',
     'sidebar_includehidden': False,
     'github_user': 'fjwCode',
     'github_repo': 'Cerium',
     'github_banner': True,
     'github_button': False,
+    'show_powered_by': False,
+    'show_related': False,
+    'note_bg': '#FFF59C'
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
@@ -133,12 +135,17 @@ html_static_path = ['_static']
 # This is required for the alabaster theme
 # refs: http://alabaster.readthedocs.io/en/latest/installation.html#sidebars
 html_sidebars = {
-    '**': [
-        'about.html',
-        'navigation.html',
-        'relations.html',  # needs 'show_related': True theme option to display
+    'index' : [
+        'sidebarintro.html',
         'searchbox.html',
-        'donate.html',
+        'sourcelink.html',
+    ]
+    '**': [
+        'sidebarlogo.html',
+        'localtoc.html',
+        'relations.html',  # needs 'show_related': True theme option to display
+        'sourcelink.html',
+        'searchbox.html',
     ]
 }
 

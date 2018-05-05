@@ -18,41 +18,47 @@
 import os
 import subprocess
 from subprocess import PIPE
+from typing import Any, Optional
+
+_PATH = str
 
 
 class Commands(object):
     '''Defines execution for the standard commands.'''
 
-    def __init__(self, executable='default'):
+    def __init__(self, executable: _PATH = 'default') -> None:
         '''Creates a new instance of the Commands.
 
         Args:
-            executable_path: Path to the AndroidDriver.
+            executable_path: Path to the AndroidDriver. On the Windows platform, the best choice is default.
         '''
 
+        _default_path = os.path.join(
+            os.path.dirname(__file__), 'executable', 'adb.exe')
+
         if executable == 'default':
-            self.path = os.path.join(os.path.dirname(__file__), 'executable', 'adb.exe')
+            self.path = _default_path
         elif executable.endswith('adb.exe'):
             if not os.path.isfile(executable):
-                raise FileNotFoundError('{!r} does not exist.'.format(self.path))
+                raise FileNotFoundError(f'{self.path!r} does not exist.')
             self.path = executable
         elif executable in ['adb', 'adb.exe']:
             PATH = os.environ['PATH']
-            if not ('adb' in PATH or 'android' in PATH):
+            if not ('adb' in PATH or 'android' in PATH or 'platform-tools' in PATH):
                 raise EnvironmentError('PATH does not exist.')
             self.path = executable
         else:
-            self.path = os.path.join(os.path.dirname(__file__), 'executable', 'adb.exe')
+            self.path = _default_path
 
-    def _build_cmd(self, args):
+    def _build_cmd(self, args: Optional[list, tuple]) -> str:
         '''Build command.'''
         cmd = [self.path]
         cmd.extend(args)
         return cmd
 
-    def execute(self, *args):
+    def execute(self, *, args: Optional[list, tuple], options: dict) -> tuple:
         '''Execute command.'''
-        args = self._build_cmd(args)
-        process = subprocess.Popen(
-            args, stdout=PIPE, stderr=PIPE, stdin=PIPE, encoding='utf-8')
+        cmd = self._build_cmd(args)
+        process = subprocess.Popen(cmd, stdout=PIPE, stderr=PIPE, stdin=PIPE,
+                                   encoding='utf-8', shell=options.get('shell', False), env=options.get('env'))
         return process

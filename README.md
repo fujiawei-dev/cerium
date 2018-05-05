@@ -110,4 +110,4 @@ driver.send_keys("I'm White Turing.")
 
 ## Author
 
-Cerium is written and maintained by [White Turing](https://github.com/fjwCode) <fujiawei@stu.hznu.edu.cn>.
+Cerium is written and maintained by [White Turing](https://github.com/fjwCode) (fujiawei@stu.hznu.edu.cn).

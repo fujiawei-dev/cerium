@@ -1,21 +1,44 @@
-# Cerium [![License](https://img.shields.io/badge/license-Apache_2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0) [![PyPI version](https://badge.fury.io/py/cerium.svg)](https://badge.fury.io/py/cerium) [![Wheel](https://img.shields.io/pypi/wheel/cerium.svg)](https://pypi.org/project/cerium/) [![Python version](https://img.shields.io/pypi/pyversions/cerium.svg)](https://pypi.org/project/cerium/)
+# Cerium
+[![PyPI version](https://img.shields.io/pypi/v/cerium.svg)](https://pypi.org/project/cerium/)
+[![Wheel](https://img.shields.io/pypi/wheel/cerium.svg)](https://pypi.org/project/cerium/)
+[![Python version](https://img.shields.io/pypi/pyversions/cerium.svg)](https://pypi.org/project/cerium/)
+[![License](https://img.shields.io/badge/license-Apache_2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+[![Documentation status](https://readthedocs.org/projects/cerium/badge/?version=latest)](http://cerium.readthedocs.io/en/latest/?badge=latest)
 
 > Cerium is an umbrella project encapsulating a variety of tools and
 libraries enabling android automation.
 
 Cerium's source code is made available under the [Apache 2.0 license](https://github.com/fjwCode/cerium/LICENSE).
 
-Welcome to Read the Docs for [Cerium](http://cerium.readthedocs.io/).
+Welcome to **Read the Docs** for [Cerium](http://cerium.readthedocs.io/)!
 
 
 ## Introduction
+
+**Cerium: A Toy for Android Automation**
+
+**Cerium** is an Android automation framework for Python, safe for human consumption.
+
+**Behold, the power of Cerium**:
+
+    >>> from cerium import AndroidDriver
+    >>> driver = AndroidDriver()
+    >>> driver.unlock(1997)   # unlock your device by password
+    >>> driver.auto_connect()   # connect to your device via TCP/IP automatically
+    Now you can unplug the USB cable, and control your device via WLAN.
+    >>> driver.view_packgets_list(keyword='tencent')
+    ['com.tencent.mm', 'com.tencent.android.qqdownloader', 'com.tencent.tim']
+    >>> driver.make_a_call(18268237856)   # call me
+
+**Cerium** allows you to send *organic, grass-fed* commands, without the the need for manual labor.
+
 [Android Debug Bridge (adb)](http://web.mit.edu/ruggles/MacData/afs/sipb/project/android/OldFiles/docs/tools/help/adb.html) is a versatile command line tool that lets you communicate with an emulator instance or connected Android-powered device. This project is based on it.
 
 ## Supported Python Versions
 * Python 3.6+
 
 ## Supported Platforms
-* Windows
+* Windows 10 (Other platforms have not been tested and are not intended to be supported for the time being officially)
 
 ## Installation
 If you have [pip](https://pip.pypa.io/) on your system, you can simply install or upgrade cerium:
@@ -83,3 +106,8 @@ driver.click(100, 100)
 driver.swipe(100, 200, 100, 100, duration=100)
 driver.send_keys("I'm White Turing.")
 ```
+
+
+## Author
+
+Cerium is written and maintained by [White Turing](https://github.com/fjwCode) <fujiawei@stu.hznu.edu.cn>.

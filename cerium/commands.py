@@ -18,7 +18,7 @@
 import os
 import subprocess
 from subprocess import PIPE
-from typing import Any, Optional
+from typing import Any, Union
 
 _PATH = str
 
@@ -50,13 +50,13 @@ class Commands(object):
         else:
             self.path = _default_path
 
-    def _build_cmd(self, args: Optional[list, tuple]) -> str:
+    def _build_cmd(self, args: Union[list, tuple]) -> str:
         '''Build command.'''
         cmd = [self.path]
         cmd.extend(args)
         return cmd
 
-    def execute(self, *, args: Optional[list, tuple], options: dict) -> tuple:
+    def execute(self, *, args: Union[list, tuple], options: dict) -> tuple:
         '''Execute command.'''
         cmd = self._build_cmd(args)
         process = subprocess.Popen(cmd, stdout=PIPE, stderr=PIPE, stdin=PIPE,

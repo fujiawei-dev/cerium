@@ -21,14 +21,16 @@ Welcome to **Read the Docs** for [Cerium](http://cerium.readthedocs.io/)!
 
 **Behold, the power of Cerium**:
 
-    >>> from cerium import AndroidDriver
-    >>> driver = AndroidDriver()
-    >>> driver.unlock(1997)   # unlock your device by password
-    >>> driver.auto_connect()   # connect to your device via TCP/IP automatically
-    Now you can unplug the USB cable, and control your device via WLAN.
-    >>> driver.view_packgets_list(keyword='tencent')
-    ['com.tencent.mm', 'com.tencent.android.qqdownloader', 'com.tencent.tim']
-    >>> driver.make_a_call(18268237856)   # call me
+```python
+>>> from cerium import AndroidDriver
+>>> driver = AndroidDriver()
+>>> driver.unlock(1997)   # unlock your device by password
+>>> driver.auto_connect()   # connect to your device via TCP/IP automatically
+Now you can unplug the USB cable, and control your device via WLAN.
+>>> driver.view_packgets_list(keyword='tencent')
+['com.tencent.mm', 'com.tencent.android.qqdownloader', 'com.tencent.tim']
+>>> driver.make_a_call(18268237856)   # call me
+```
 
 **Cerium** allows you to send *organic, grass-fed* commands, without the the need for manual labor.
 

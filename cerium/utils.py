@@ -18,7 +18,7 @@
 """The utils methods."""
 
 import socket
-from typing import Dict, Optional
+from typing import Dict, Union
 
 
 def free_port() -> int:
@@ -31,7 +31,7 @@ def free_port() -> int:
     return port
 
 
-def is_connectable(host: str, port: Optional[int, str]) -> bool:
+def is_connectable(host: str, port: Union[int, str]) -> bool:
     """Tries to connect to the device to see if it is connectable.
 
     Args:
@@ -53,6 +53,6 @@ def is_connectable(host: str, port: Optional[int, str]) -> bool:
     return result
 
 
-def merge_dict(dict1: Optional[Dict], dict2: Optional[Dict]) -> Dict:
+def merge_dict(dict1: Union[Dict], dict2: Union[Dict]) -> Dict:
     new_dict = {**dict1, **dict2}
     return new_dict

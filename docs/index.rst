@@ -86,8 +86,8 @@ you.
 
 .. toctree::
    :maxdepth: 2
-
-    authors
+   
+   authors
 
 
 There are no more guides. You are now guideless.

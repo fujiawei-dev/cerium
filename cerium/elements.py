@@ -17,14 +17,13 @@
 
 from typing import List, Tuple
 
-from .androiddriver import AndroidDriver
 from .keys import Keys
 
 
 class Elements(object):
     '''Represents a element.'''
 
-    def __init__(self, parent: AndroidDriver, node: dict, key: Keys, value: str, coord: List[int], click_point: Tuple[int]) -> None:
+    def __init__(self, parent, node: dict, key: Keys, value: str, coord: List[int], click_point: Tuple[int]) -> None:
         self._parent = parent
         self._node = node
         self._key = key

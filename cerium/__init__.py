@@ -15,10 +15,34 @@
 # specific language governing permissions and limitations
 # under the License.
 
+import sys
+import warnings
+
 from .androiddriver import AndroidDriver
 from .by import By
 from .intent import Actions, Category
 from .keys import Keys
 
+
+# Meta information
 __author__ = "White Turing"
-__version__ = "1.1.1"
+__version__ = "1.2.0"
+
+
+# Sanity checking.
+try:
+    assert sys.version_info.major == 3
+    assert sys.version_info.minor > 5
+except AssertionError:
+    raise RuntimeError('Cerium requires Python 3.6+!') from AssertionError
+
+if sys.platform != 'win32':
+    warnings.warn('Cerium only supports Windows officially! Cannot guarantee normal operation on other platforms!', RuntimeWarning)
+
+__all__ = [
+    'AndroidDriver',
+    'By',
+    'Keys',
+    'Actions',
+    'Category,'
+]

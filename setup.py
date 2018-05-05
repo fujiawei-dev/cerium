@@ -50,8 +50,9 @@ setup(
     license='Apache 2.0',
     author='White Turing',
     author_email='fujiawei@stu.hznu.edu.cn',
-    description='A Android automation framework.',
+    description='An Android automation framework.',
     long_description=long_description,
+    long_description_content_type='text/markdown',
     url='https://github.com/fjwCode/cerium',
     keywords=['android', 'adb', 'automation', 'testing'],
     classifiers=[

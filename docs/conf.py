@@ -139,7 +139,7 @@ html_sidebars = {
         'sidebarintro.html',
         'searchbox.html',
         'sourcelink.html',
-    ]
+    ],
     '**': [
         'sidebarlogo.html',
         'localtoc.html',

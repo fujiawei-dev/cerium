@@ -90,7 +90,7 @@ class BaseAndroidDriver(Service):
         '''Start server.'''
         self.start()
 
-    def kill_server(self -> None:
+    def kill_server(self) -> None:
         '''Kill the server if it is running.'''
         self.stop()
 
@@ -98,7 +98,7 @@ class BaseAndroidDriver(Service):
         '''Restart the server if it is running.'''
         self.restart()
 
-    def _execute(self, *args: str, **kwargs: Any) -> tuple:
+    def _execute(self, *args: str, **kwargs) -> tuple:
         '''Execute command.'''
         process = self.execute(
             args=args, options=merge_dict(self.options, kwargs))
@@ -211,7 +211,7 @@ class BaseAndroidDriver(Service):
         '''Restart adbd without root permissions.'''
         self._execute('-s', self.device_sn, 'unroot')
 
-    def tcpip(self, port: int or str = 5555) - None:
+    def tcpip(self, port: int or str = 5555) -> None:
         '''Restart adb server listening on TCP on PORT.'''
         self._execute('-s', self.device_sn, 'tcpip', str(port))
 
@@ -239,7 +239,7 @@ class BaseAndroidDriver(Service):
             raise FileNotFoundError(f'Local {local!r} does not exist.')
         self._execute('-s', self.device_sn, 'push', local, remote)
 
-    def push_sync(self, local: _PATH = 'LICENSE', remote: _PATH = '/sdcard/LICENSE') - None:
+    def push_sync(self, local: _PATH = 'LICENSE', remote: _PATH = '/sdcard/LICENSE') -> None:
         '''Only push files that are newer on the host than the device.'''
         if not os.path.exists(local):
             raise FileNotFoundError(f'Local {local!r} does not exist.')
@@ -249,7 +249,7 @@ class BaseAndroidDriver(Service):
         '''Copy files/directories from device.'''
         output, _=self._execute('-s', self.device_sn, 'pull', remote, local)
         if 'error' in output:
-            raise FileNotFoundError(f'Remote {remote!r} does not exist.'.)
+            raise FileNotFoundError(f'Remote {remote!r} does not exist.')
 
     def pull_a(self, remote: _PATH, local: _PATH) -> None:
         '''Copy files/directories from device, and preserve file timestamp and mode.'''

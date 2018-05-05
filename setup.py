@@ -16,20 +16,33 @@
 # under the License.
 
 
-from cerium import __version__
-from setuptools import setup
+# Note: To upload this project, you must:
 
 '''
 python setup.py sdist
+pip install dist/cerium-1.2.0.tar.gz
 python setup.py bdist_wheel
+pip install twine
 twine upload dist/*
-pip install dist\cerium-1.1.0.tar.gz
 '''
 
+import os.path
+from setuptools import setup
+
+from cerium import __version__
+
+
+# What packages are required for this module to be executed?
 requires = [
     'lxml>=4.2.1',
 ]
 
+# Import the README and use it as the long-description.
+cwd = os.path.abspath(os.path.dirname(__file__))
+with open(os.path.join(cwd, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
+
+# Where the magic happens:
 setup(
     name='cerium',
     packages=['cerium'],
@@ -38,7 +51,7 @@ setup(
     author='White Turing',
     author_email='fujiawei@stu.hznu.edu.cn',
     description='A Android automation framework.',
-    long_description='This project is mainly targeted to users that need to communicate with Android devices in an automated fashion, such as in automated testing.',
+    long_description=long_description,
     url='https://github.com/fjwCode/cerium',
     keywords=['android', 'adb', 'automation', 'testing'],
     classifiers=[
@@ -46,6 +59,8 @@ setup(
         'License :: OSI Approved :: Apache Software License',
         'Operating System :: Microsoft :: Windows',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: Implementation :: CPython',
+        'Programming Language :: Python :: Implementation :: PyPy'
         'Topic :: Software Development :: Testing',
         'Topic :: Software Development :: Libraries',
     ],
@@ -57,7 +72,7 @@ setup(
         ]
     },
     include_package_data=True,
-    python_requires='>=3.6',
+    python_requires='>=3.6.0',
     install_requires=requires,
     platforms=["Windows"],
 )

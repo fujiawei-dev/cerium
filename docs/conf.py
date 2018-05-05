@@ -25,7 +25,9 @@ sys.path.insert(0, os.path.abspath('..'))
 import cerium
 from recommonmark.parser import CommonMarkParser
 
-
+source_parsers = {
+    '.md': CommonMarkParser,
+}
 
 # -- General configuration ------------------------------------------------
 
@@ -72,7 +74,7 @@ release = cerium.__version__
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = 'en'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -112,16 +114,12 @@ html_theme = 'alabaster'
 # documentation.
 #
 html_theme_options = {
-    'description': ('A Android automation framework'),
+    'description': 'A Android automation framework',
+    'sidebar_includehidden': False,
     'github_user': 'fjwCode',
     'github_repo': 'Cerium',
     'github_banner': True,
-    'github_type': 'mark',
-    'github_count': False,
-    'font_family': '"Charis SIL", "Noto Serif", serif',
-    'head_font_family': 'Lato, sans-serif',
-    'code_font_family': '"Code new roman", "Ubuntu Mono", monospace',
-    'code_font_size': '1rem',
+    'github_button': False,
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
@@ -277,9 +275,3 @@ epub_exclude_files = ['search.html']
 
 # If false, no index is generated.
 #epub_use_index = True
-
-
-
-source_parsers = {
-    '.md': CommonMarkParser,
-}

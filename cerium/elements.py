@@ -15,13 +15,16 @@
 # specific language governing permissions and limitations
 # under the License.
 
+from typing import List, Tuple
+
+from .androiddriver import AndroidDriver
 from .keys import Keys
 
 
 class Elements(object):
     '''Represents a element.'''
 
-    def __init__(self, parent, node, key, value, coord, click_point):
+    def __init__(self, parent: AndroidDriver, node: dict, key: Keys, value: str, coord: List[int], click_point: Tuple[int]) -> None:
         self._parent = parent
         self._node = node
         self._key = key
@@ -33,56 +36,56 @@ class Elements(object):
         return '<{0.__module__}.{0.__name__} (element="{2}: {3}", coord="{4}")>'.format(type(self), self._key, self._value, self._coord)
 
     @property
-    def text(self):
+    def text(self) -> str:
         """The text of the element."""
         return self._node['text']
 
     @property
-    def resource_id(self):
+    def resource_id(self) -> str:
         """The resource-id of the element."""
         return self._node['resource-id']
 
     @property
-    def class_(self):
+    def class_(self) -> str:
         """The class of the element."""
         return self._node['class']
 
     @property
-    def package(self):
+    def package(self) -> str:
         """The package of the element."""
         return self._node['package']
 
     @property
-    def content_desc(self):
+    def content_desc(self) -> str:
         """The content-desc of the element."""
         return self._node['content-desc']
 
     @property
-    def checkable(self):
+    def checkable(self) -> bool:
         """The checkable of the element."""
         return self._node['checkable']
 
     @property
-    def bounds(self):
+    def bounds(self) -> List[int]:
         """The bounds of the element."""
         return self._coord
 
     @property
-    def coord(self):
+    def coord(self) -> List[int]:
         """The coord of the element."""
         return self._coord
 
-    def click(self):
+    def click(self) -> None:
         """Clicks the element."""
         self._parent.click(*self._click_point)
 
-    def clear(self):
+    def clear(self) -> None:
         """Clears the text if it's a text entry element."""
         self.click()
         for i in self.text:
             self._parent.send_keyevents(Keys.DEL)
 
-    def send_keys(self, text: str = 'cerium'):
+    def send_keys(self, text: str = 'cerium') -> None:
         '''Simulates typing keys.'''
         self.click()
         self._parent.send_keys(text)

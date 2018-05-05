@@ -19,9 +19,13 @@
 #
 import os
 import sys
+
+import alabaster
+import cerium
+from recommonmark.parser import CommonMarkParser
+
 sys.path.insert(0, os.path.abspath('..'))
 
-import cerium
 
 # -- General configuration ------------------------------------------------
 
@@ -34,7 +38,9 @@ import cerium
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.githubpages',
     'sphinx.ext.viewcode',
+    'alabaster',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -101,12 +107,19 @@ pygments_style = 'sphinx'
 # a list of builtin themes.
 #
 html_theme = 'alabaster'
+html_theme_path = [alabaster.get_path()]
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
 html_theme_options = {
+    'description': ('A Android automation framework'),
+    'github_user': 'fjwCode',
+    'github_repo': 'Cerium',
+    'github_banner': True,
+    'github_type': 'mark',
+    'github_count': False,
     'font_family': '"Charis SIL", "Noto Serif", serif',
     'head_font_family': 'Lato, sans-serif',
     'code_font_family': '"Code new roman", "Ubuntu Mono", monospace',
@@ -129,6 +142,7 @@ html_sidebars = {
         'navigation.html',
         'relations.html',  # needs 'show_related': True theme option to display
         'searchbox.html',
+        'donate.html',
     ]
 }
 
@@ -267,7 +281,6 @@ epub_exclude_files = ['search.html']
 #epub_use_index = True
 
 
-from recommonmark.parser import CommonMarkParser
 
 source_parsers = {
     '.md': CommonMarkParser,

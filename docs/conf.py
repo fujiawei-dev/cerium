@@ -23,7 +23,6 @@ import sys
 sys.path.insert(0, os.path.abspath('..'))
 
 import cerium
-import alabaster
 from recommonmark.parser import CommonMarkParser
 
 
@@ -41,7 +40,6 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.githubpages',
     'sphinx.ext.viewcode',
-    'alabaster',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -108,7 +106,6 @@ pygments_style = 'sphinx'
 # a list of builtin themes.
 #
 html_theme = 'alabaster'
-html_theme_path = [alabaster.get_path()]
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the

@@ -15,7 +15,7 @@
 # specific language governing permissions and limitations
 # under the License.
 
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Union
 
 from .commands import _PATH, Commands
 from .utils import free_port, is_connectable, merge_dict
@@ -24,7 +24,7 @@ from .utils import free_port, is_connectable, merge_dict
 class BaseService(Commands):
     '''Object that manages the starting and stopping of the AndroidDriver.'''
 
-    def __init__(self, executable: _PATH = 'default', port: Optional[int, str] = 5037, env: Dict = None) -> None:
+    def __init__(self, executable: _PATH = 'default', port: Union[int, str] = 5037, env: Dict = None) -> None:
         super(BaseService, self).__init__(executable)
         self.port = port
         if self.port == 0:
@@ -40,7 +40,7 @@ class BaseService(Commands):
         raise NotImplemented(
             "This method needs to be implemented in a sub class")
 
-    def _build_cmd(self, args: Optional[list, tuple]) -> str:
+    def _build_cmd(self, args: Union[list, tuple]) -> str:
         '''Build command.'''
         cmd = [self.path]
         cmd.extend(self.service_args())
@@ -81,14 +81,14 @@ class BaseService(Commands):
         models = output.split()[7::6]
         return dict(zip(devices, models))
 
-    def connect(self, host: str = '192.168.0.3', port: Optional[int, str] = 5555) -> None:
+    def connect(self, host: str = '192.168.0.3', port: Union[int, str] = 5555) -> None:
         '''Connect to a device via TCP/IP directly.'''
         self.device_sn = f'{host}:{port}'
         if not is_connectable(host, port):
             raise ConnectionError(f'Cannot connect to {self.device_sn}.')
         self._execute('connect', self.device_sn)
 
-    def __disconnect(self, host: str = '192.168.0.3', port: Optional[int, str] = 5555) -> None:
+    def __disconnect(self, host: str = '192.168.0.3', port: Union[int, str] = 5555) -> None:
         '''Disconnect from given TCP/IP device [default port=5555].'''
         self.device_sn = None
         self._execute('disconnect', f'{host}:{port}')
@@ -110,7 +110,7 @@ class BaseService(Commands):
 class Service(BaseService):
     '''Object that manages the starting and stopping of the AndroidDriver.'''
 
-    def __init__(self, executable_path: _PATH = 'default', port: Optional[int, str] = 5037, env: Dict = None, service_args: Optional[list, tuple] = None) -> None:
+    def __init__(self, executable_path: _PATH = 'default', port: Union[int, str] = 5037, env: Dict = None, service_args: Union[list, tuple] = None) -> None:
         '''Creates a new instance of the Service.
 
         Args:

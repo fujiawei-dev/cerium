@@ -20,6 +20,7 @@ import warnings
 
 from .androiddriver import AndroidDriver
 from .by import By
+from .exceptions import *
 from .intent import Actions, Category
 from .keys import Keys
 

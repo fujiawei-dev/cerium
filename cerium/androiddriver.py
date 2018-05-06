@@ -61,7 +61,7 @@ class BaseAndroidDriver(Service):
 
         self._dev = dev
         super(BaseAndroidDriver, self).__init__(executable_path=executable_path,
-                                            port=service_port, env=env, service_args=service_args)
+                                                port=service_port, env=env, service_args=service_args)
         self.start()
         self.device_sn = device_sn
 
@@ -85,6 +85,9 @@ class BaseAndroidDriver(Service):
                 f"Multiple devices detected: {' | '.join(self.devices_list)}, please specify device serial number or host.")
         else:
             self.device_sn = self.devices_list[0]
+        if self.get_state() == 'offline':
+            raise DeviceConnectionException(
+                'The device is offline. Please reconnect.')
 
     def start_server(self) -> None:
         '''Start server.'''
@@ -104,7 +107,7 @@ class BaseAndroidDriver(Service):
             args=args, options=merge_dict(self.options, kwargs))
         command = ' '.join(process.args)
         if self._dev:
-            output, error=process.communicate()
+            output, error = process.communicate()
             print(
                 "Debug Information",
                 "Command: {!r}".format(command),
@@ -115,9 +118,19 @@ class BaseAndroidDriver(Service):
         return process.communicate()
 
     # Android Device Information
+    @property
+    def serial_number(self) -> str:
+        '''Show device serial number.'''
+        return self.device_sn
+
+    @classmethod
+    def serial_matcher(cls, serial) -> bool:
+        """Returns a device matcher for the given serial."""
+        return lambda device: device.serial_number == serial
+
     def get_device_model(self) -> str:
         '''Show device model.'''
-        output, _=self._execute(
+        output, _ = self._execute(
             '-s', self.device_sn, 'shell', 'getprop', 'ro.product.model')
         return output.strip()
 
@@ -142,67 +155,67 @@ class BaseAndroidDriver(Service):
                 'temperature': '310',
                 'voltage': '3965'}
         '''
-        output, _=self._execute(
+        output, _ = self._execute(
             '-s', self.device_sn, 'shell', 'dumpsys', 'battery')
-        battery_status=re.split('\n  |: ', output[33:].strip())
+        battery_status = re.split('\n  |: ', output[33:].strip())
         return dict(zip(battery_status[::2], battery_status[1::2]))
 
     def get_resolution(self) -> list:
         '''Show device resolution.'''
-        output, _=self._execute('-s', self.device_sn, 'shell', 'wm', 'size')
+        output, _ = self._execute('-s', self.device_sn, 'shell', 'wm', 'size')
         return output.split()[2].split('x')
 
     def get_screen_density(self) -> str:
         '''Show device screen density (PPI).'''
-        output, _=self._execute(
+        output, _ = self._execute(
             '-s', self.device_sn, 'shell', 'wm', 'density')
         return output.split()[2]
 
     def get_displays_params(self) -> str:
         '''Show displays parameters.'''
-        output, error=self._execute(
+        output, error = self._execute(
             '-s', self.device_sn, 'shell', 'dumpsys', 'window', 'displays')
         return output
 
     def get_android_id(self) -> str:
         '''Show Android ID.'''
-        output, _=self._execute(
+        output, _ = self._execute(
             '-s', self.device_sn, 'shell', 'settings', 'get', 'secure', 'android_id')
         return output.strip()
 
     def get_android_version(self) -> str:
         '''Show Android version.'''
-        output, _=self._execute(
+        output, _ = self._execute(
             '-s', self.device_sn, 'shell', 'getprop', 'ro.build.version.release')
         return output.strip()
 
     def get_device_mac(self) -> str:
         '''Show device MAC.'''
-        output, _=self._execute(
+        output, _ = self._execute(
             '-s', self.device_sn, 'shell', 'cat', '/sys/class/net/wlan0/address')
         return output.strip()
 
     def get_cpu_info(self) -> str:
         '''Show device CPU information.'''
-        output, _=self._execute(
+        output, _ = self._execute(
             '-s', self.device_sn, 'shell', 'cat', '/proc/cpuinfo')
         return output
 
     def get_memory_info(self) -> str:
         '''Show device memory information.'''
-        output, _=self._execute(
+        output, _ = self._execute(
             '-s', self.device_sn, 'shell', 'cat', '/proc/meminfo')
         return output
 
     def get_sdk_version(self) -> str:
         '''Show Android SDK version.'''
-        output, _=self._execute(
+        output, _ = self._execute(
             '-s', self.device_sn, 'shell', 'getprop', 'ro.build.version.sdk')
         return output.strip()
 
     def root(self) -> None:
         '''Restart adbd with root permissions.'''
-        output, _=self._execute('-s', self.device_sn, 'root')
+        output, _ = self._execute('-s', self.device_sn, 'root')
         if not output:
             raise PermissionError(
                 f'{self.device_sn!r} does not have root permission.')
@@ -217,9 +230,9 @@ class BaseAndroidDriver(Service):
 
     def get_ip_addr(self) -> str:
         '''Show IP Address.'''
-        output, _=self._execute(
+        output, _ = self._execute(
             '-s', self.device_sn, 'shell', 'ip', '-f', 'inet', 'addr', 'show', 'wlan0')
-        ip_addr=re.findall(
+        ip_addr = re.findall(
             r"\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b", output)
         if not ip_addr:
             raise ConnectionError(
@@ -247,13 +260,13 @@ class BaseAndroidDriver(Service):
 
     def pull(self, remote: _PATH, local: _PATH) -> None:
         '''Copy files/directories from device.'''
-        output, _=self._execute('-s', self.device_sn, 'pull', remote, local)
+        output, _ = self._execute('-s', self.device_sn, 'pull', remote, local)
         if 'error' in output:
             raise FileNotFoundError(f'Remote {remote!r} does not exist.')
 
     def pull_a(self, remote: _PATH, local: _PATH) -> None:
         '''Copy files/directories from device, and preserve file timestamp and mode.'''
-        output, _=self._execute(
+        output, _ = self._execute(
             '-s', self.device_sn, 'pull', '-a', remote, local)
         if 'error' in output:
             raise FileNotFoundError(f'Remote {remote!r} does not exist.')
@@ -352,7 +365,7 @@ class BaseAndroidDriver(Service):
         '''
         if option not in ['-f', '-d', '-e', '-s', '-3', '-i', '-u']:
             raise ValueError(f'There is no option called {option!r}.')
-        output, _=self._execute(
+        output, _ = self._execute(
             '-s', self.device_sn, 'shell', 'pm', 'list', 'packages', option, keyword)
         return list(map(lambda x: x[8:], output.splitlines()))
 
@@ -361,7 +374,7 @@ class BaseAndroidDriver(Service):
         if package not in self.view_packgets_list():
             raise NoSuchPackageException(
                 f'There is no such package {package!r}.')
-        output, _=self._execute(
+        output, _ = self._execute(
             '-s', self.device_sn, 'shell', 'pm', 'path', package)
         return output[8:-1]
 
@@ -374,31 +387,31 @@ class BaseAndroidDriver(Service):
 
     def view_focused_activity(self) -> str:
         '''View focused activity.'''
-        output, _=self._execute(
+        output, _ = self._execute(
             '-s', self.device_sn, 'shell', 'dumpsys', 'activity', 'activities')
         return re.findall(r'mFocusedActivity: .+(com[a-zA-Z0-9\.]+/.[a-zA-Z0-9\.]+)', output)[0]
 
     def view_running_services(self, package: str='') -> str:
         '''View running services.'''
-        output, _=self._execute(
+        output, _ = self._execute(
             '-s', self.device_sn, 'shell', 'dumpsys', 'activity', 'services', package)
         return output
 
     def view_package_info(self, package: str='') -> str:
         '''View package detail information.'''
-        output, _=self._execute(
+        output, _ = self._execute(
             '-s', self.device_sn, 'shell', 'dumpsys', 'package', package)
         return output
 
     def view_current_app_behavior(self) -> str:
         '''View application behavior in the current window.'''
-        output, _=self._execute(
+        output, _ = self._execute(
             '-s', self.device_sn, 'shell', 'dumpsys', 'window', 'windows')
         return re.findall(r'mCurrentFocus=.+(com[a-zA-Z0-9\.]+/.[a-zA-Z0-9\.]+)', output)[0]
 
     def view_surface_app_activity(self) -> str:
         '''Get package with activity of applications that are running in the foreground.'''
-        output, error=self._execute(
+        output, error = self._execute(
             '-s', self.device_sn, 'shell', 'dumpsys', 'window', 'w')
         return re.findall(r"name=([a-zA-Z0-9\.]+/.[a-zA-Z0-9\.]+)", output)
 
@@ -411,7 +424,7 @@ class BaseAndroidDriver(Service):
                 -c <CATEGORY>
                 -n <COMPONENT>
         '''
-        _, error=self._execute('-s', self.device_sn,
+        _, error = self._execute('-s', self.device_sn,
                                  'shell', 'am', 'start', option, *args)
         if error and error.startswith('Error'):
             raise ApplicationsException(error.split(':', 1)[-1].strip())
@@ -430,21 +443,21 @@ class BaseAndroidDriver(Service):
 
     def app_start_service(self, *args) -> None:
         '''Start a service.'''
-        _, error=self._execute('-s', self.device_sn,
+        _, error = self._execute('-s', self.device_sn,
                                  'shell', 'am', 'startservice', *args)
         if error and error.startswith('Error'):
             raise ApplicationsException(error.split(':', 1)[-1].strip())
 
     def app_stop_service(self, *args) -> None:
         '''Stop a service'''
-        _, error=self._execute('-s', self.device_sn, 'shell',
+        _, error = self._execute('-s', self.device_sn, 'shell',
                                  'am', 'stopservice', *args)
         if error and error.startswith('Error'):
             raise ApplicationsException(error.split(':', 1)[-1].strip())
 
     def app_broadcast(self, *args) -> None:
         '''Send a broadcast.'''
-        _, error=self._execute('-s', self.device_sn, 'shell',
+        _, error = self._execute('-s', self.device_sn, 'shell',
                                  'am', 'broadcast', *args)
         if error:
             raise ApplicationsException(error.split(':', 1)[-1].strip())
@@ -461,14 +474,14 @@ class BaseAndroidDriver(Service):
             level: HIDDEN | RUNNING_MODERATE | BACKGROUNDRUNNING_LOW | \
                      MODERATE | RUNNING_CRITICAL | COMPLETE
         '''
-        _, error=self._execute('-s', self.device_sn, 'shell',
+        _, error = self._execute('-s', self.device_sn, 'shell',
                                  'am', 'send-trim-memory', str(pid), level)
         if error and error.startswith('Error'):
             raise ApplicationsException(error.split(':', 1)[-1].strip())
 
     def app_start_up_time(self, package: str) -> str:
         '''Get the time it took to launch your application.'''
-        output, _=self._execute(
+        output, _ = self._execute(
             '-s', self.device_sn, 'shell', 'am', 'start', '-W', package)
         return re.findall('TotalTime: \d+', output)[0]
 
@@ -791,6 +804,10 @@ class AndroidDriver(BaseAndroidDriver):
     def make_a_call(self, number: int or str = 18268237856) -> None:
         '''Make a call.'''
         self.app_start_action(Actions.CALL, '-d', 'tel:{}'.format(str(number)))
+
+    def end_the_call(self) -> None:
+        '''End the current call.'''
+        self.send_keyevents(Keys.ENDCALL)
 
     def swipe_left(self, width: int = 1080, length: int = 1920) -> None:
         '''Swipe left.'''

@@ -18,6 +18,7 @@
 from typing import Any, Dict, Union
 
 from .commands import _PATH, Commands
+from .exceptions import DeviceConnectionException
 from .utils import free_port, is_connectable, merge_dict
 
 
@@ -102,8 +103,7 @@ class BaseService(Commands):
         '''offline | bootloader | device'''
         output, error = self._execute('get-state')
         if error:
-            raise DeviceConnectionException(
-                'No devices are connected. Please connect the device with USB or via WLAN and turn on the USB debugging option.')
+            raise DeviceConnectionException(error.split(':', 1)[-1].strip())
         return output.strip()
 
 

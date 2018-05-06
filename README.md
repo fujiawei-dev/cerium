@@ -1,5 +1,5 @@
 # Cerium
-![Platform](https://img.shields.io/badge/Platform-Windows-4BC51D.svg)(https://pypi.org/project/cerium/)
+[![Platform](https://img.shields.io/badge/Platform-Windows-4BC51D.svg)](https://pypi.org/project/cerium/)
 [![PyPI version](https://img.shields.io/pypi/v/cerium.svg)](https://pypi.org/project/cerium/)
 [![Wheel](https://img.shields.io/pypi/wheel/cerium.svg)](https://pypi.org/project/cerium/)
 [![Python version](https://img.shields.io/pypi/pyversions/cerium.svg)](https://pypi.org/project/cerium/)

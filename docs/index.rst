@@ -14,6 +14,10 @@ Release v\ |version|. (:ref:`Installation <install>`)
 
 .. image:: https://img.shields.io/pypi/l/cerium.svg
     :target: https://pypi.org/project/cerium/
+    :alt: License
+
+.. image:: https://img.shields.io/pypi/v/cerium.svg
+    :target: https://pypi.org/project/cerium/
     :alt: Latest version on PyPi
 
 .. image:: https://img.shields.io/pypi/wheel/cerium.svg
@@ -27,10 +31,6 @@ Release v\ |version|. (:ref:`Installation <install>`)
 .. image:: https://readthedocs.org/projects/cerium/badge/?version=latest
     :target: http://cerium.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation status
-
-.. image:: https://img.shields.io/badge/license-Apache_2-blue.svg
-    :target: https://www.apache.org/licenses/LICENSE-2.0
-    :alt: License
 
 
 **Cerium** is an Android automation framework for Python, safe for human consumption.

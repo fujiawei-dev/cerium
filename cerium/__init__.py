@@ -1,5 +1,5 @@
-# Licensed to the Software Freedom Conservancy (SFC) under one
-# or more contributor license agreements.  See the NOTICE file
+# Licensed to the White Turing under one or more
+# contributor license agreements.  See the NOTICE file
 # distributed with this work for additional information
 # regarding copyright ownership.  The SFC licenses this file
 # to you under the Apache License, Version 2.0 (the
@@ -27,7 +27,7 @@ from .keys import Keys
 
 # Meta information
 __author__ = "White Turing"
-__version__ = "1.2.3"
+__version__ = "1.2.4"
 
 
 # Sanity checking.

@@ -1,5 +1,5 @@
-# Licensed to the Software Freedom Conservancy (SFC) under one
-# or more contributor license agreements.  See the NOTICE file
+# Licensed to the White Turing under one or more
+# contributor license agreements.  See the NOTICE file
 # distributed with this work for additional information
 # regarding copyright ownership.  The SFC licenses this file
 # to you under the Apache License, Version 2.0 (the
@@ -89,12 +89,12 @@ class BaseService(Commands):
             raise ConnectionError(f'Cannot connect to {self.device_sn}.')
         self._execute('connect', self.device_sn)
 
-    def __disconnect(self, host: str = '192.168.0.3', port: Union[int, str] = 5555) -> None:
+    def disconnect(self, host: str = '192.168.0.3', port: Union[int, str] = 5555) -> None:
         '''Disconnect from given TCP/IP device [default port=5555].'''
         self.device_sn = None
         self._execute('disconnect', f'{host}:{port}')
 
-    def __disconnect_all(self) -> None:
+    def disconnect_all(self) -> None:
         '''Disconnect all.'''
         self.device_sn = None
         self._execute('disconnect')

@@ -1,5 +1,5 @@
-# Licensed to the Software Freedom Conservancy (SFC) under one
-# or more contributor license agreements.  See the NOTICE file
+# Licensed to the White Turing under one or more
+# contributor license agreements.  See the NOTICE file
 # distributed with this work for additional information
 # regarding copyright ownership.  The SFC licenses this file
 # to you under the Apache License, Version 2.0 (the
@@ -20,7 +20,7 @@
 
 '''
 python setup.py sdist
-pip install dist/cerium-1.2.0.tar.gz
+pip install dist/cerium-1.2.4.tar.gz
 python setup.py bdist_wheel
 pip install twine
 twine upload dist/*

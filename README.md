@@ -111,6 +111,12 @@ driver.send_keys("I'm White Turing.")
 ```
 
 
+## Demonstration
+
+* [**A wireless automation application**](https://github.com/fjwCode/auto-answer-tnwz)
+* [**A command line wireless control tool for Android**](https://github.com/fjwCode/wireless-control)
+
+
 ## Author
 
 Cerium is written and maintained by [White Turing](https://github.com/fjwCode) (fujiawei@stu.hznu.edu.cn).

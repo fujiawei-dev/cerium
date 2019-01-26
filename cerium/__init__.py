@@ -27,7 +27,7 @@ from .keys import Keys
 
 # Meta information
 __author__ = "White Turing"
-__version__ = "1.2.4"
+__version__ = "1.2.5"
 
 
 # Sanity checking.

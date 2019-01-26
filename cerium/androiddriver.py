@@ -526,10 +526,15 @@ class BaseAndroidDriver(Service):
                       'input', 'tap', str(x), str(y))
 
     def swipe(self, x1: int, y1: int, x2: int, y2: int, duration: int = 100) -> None:
-        '''Simulate finger swipe.'''
+        '''Simulate finger swipe. (1000ms = 1s)'''
         self._execute('-s', self.device_sn, 'shell',
                       'input', 'swipe', str(x1), str(y1), str(x2), str(y2), str(duration))
 
+    def long_press(self, x: int, y: int, duration: int = 1000) -> None:
+        '''Simulate finger long press somewhere. (1000ms = 1s)'''
+        self._execute('-s', self.device_sn, 'shell',
+                      'input', 'swipe', str(x), str(y), str(x), str(y), str(duration))
+                
     def send_keys(self, text: str = 'cerium') -> None:
         '''Simulates typing keys.'''
         for char in text:

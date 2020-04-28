@@ -115,7 +115,7 @@ html_theme = 'alabaster'
 #
 html_theme_options = {
     'sidebar_includehidden': False,
-    'github_user': 'fjwCode',
+    'github_user': 'ffujiawei',
     'github_repo': 'Cerium',
     'github_banner': True,
     'github_button': False,

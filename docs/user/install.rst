@@ -20,11 +20,11 @@ Get the Source Code
 -------------------------
 
 Cerium is actively developed on GitHub, where the code is
-`always available <https://github.com/fjwCode/cerium>`_.
+`always available <https://github.com/ffujiawei/cerium>`_.
 
 You can either clone the public repository::
 
-    git clone git@github.com:fjwCode/cerium.git
+    git clone git@github.com:ffujiawei/cerium.git
     cd cerium
     python setup.py install
 

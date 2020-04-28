@@ -9,7 +9,7 @@
 > Cerium is an umbrella project encapsulating a variety of tools and
 libraries enabling android automation.
 
-Cerium's source code is made available under the [Apache 2.0 license](https://github.com/fjwCode/cerium/LICENSE).
+Cerium's source code is made available under the [Apache 2.0 license](https://github.com/ffujiawei/cerium/LICENSE).
 
 Welcome to **Read the Docs** for [Cerium](http://cerium.readthedocs.io/)!
 
@@ -52,9 +52,9 @@ Alternately, you can download the source distribution from [PyPI](https://badge.
 
     python setup.py install
 
-Or by [github.com](https://github.com/fjwCode/cerium):
+Or by [github.com](https://github.com/ffujiawei/cerium):
 
-    git clone git@github.com:fjwCode/cerium.git
+    git clone git@github.com:ffujiawei/cerium.git
     cd cerium
     python setup.py install
 
@@ -113,10 +113,10 @@ driver.send_keys("I'm White Turing.")
 
 ## Demonstration
 
-* [**A wireless automation application**](https://github.com/fjwCode/auto-answer-tnwz)
-* [**A command line wireless control tool for Android**](https://github.com/fjwCode/wireless-control)
+* [**A wireless automation application**](https://github.com/ffujiawei/auto-answer-tnwz)
+* [**A command line wireless control tool for Android**](https://github.com/ffujiawei/wireless-control)
 
 
 ## Author
 
-Cerium is written and maintained by [White Turing](https://github.com/fjwCode) (fujiawei@stu.hznu.edu.cn).
+Cerium is written and maintained by [White Turing](https://github.com/ffujiawei) (fujiawei@stu.hznu.edu.cn).

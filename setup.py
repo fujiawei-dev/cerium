@@ -20,7 +20,7 @@
 
 '''
 python setup.py sdist
-pip install dist/cerium-1.2.4.tar.gz
+pip install dist/cerium-1.2.6.tar.gz
 python setup.py bdist_wheel
 pip install twine
 twine upload dist/*
@@ -53,13 +53,14 @@ setup(
     description='An Android automation framework.',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.com/fjwCode/cerium',
+    url='https://github.com/ffujiawei/cerium',
     keywords=['android', 'adb', 'automation', 'testing'],
     classifiers=[
         'Intended Audience :: Developers',
         'License :: OSI Approved :: Apache Software License',
         'Operating System :: Microsoft :: Windows',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy',
         'Topic :: Software Development :: Testing',

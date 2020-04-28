@@ -1,5 +1,12 @@
 # Change Log of Cerium Library
 
+
+## [1.2.6] - 2020-04-28
+### Added & Update
+- Add KEYCODE_PASTE.
+- Update links.
+
+
 ## [1.2.5] - 2019-01-26
 ### Added
 - Add long press function for simulating finger long press somewhere.

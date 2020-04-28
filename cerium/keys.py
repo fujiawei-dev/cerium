@@ -152,3 +152,6 @@ class Keys(object):
     MEDIA_PREVIOUS = 88
     MEDIA_REWIND = 89
     MEDIA_FAST_FORWARD = 90
+
+    COPY = 278
+    PASTE = 279

@@ -744,6 +744,10 @@ class AndroidDriver(BaseAndroidDriver):
         '''Show recent apps tray.'''
         self.send_keyevents(Keys.SWITCH)
 
+    def paste(self) -> None:
+        '''Paste from clipboard.'''
+        self.send_keyevents(Keys.PASTE)
+
     def wake(self) -> None:
         '''Wake up screen.'''
         self.send_keyevents(Keys.WAKE)
